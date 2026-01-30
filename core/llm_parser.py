@@ -2,8 +2,6 @@ import json
 import streamlit as st
 from openai import OpenAI
 
-# Initialize client using Streamlit secrets
-# You will set this up in Step 4
 def get_client():
     api_key = st.secrets.get("OPENAI_API_KEY")
     if not api_key:
@@ -45,7 +43,6 @@ def get_llm_command(user_query, columns):
         }
 
     # 2. Construct low-token prompt
-    # We only send column names, NOT the data.
     system_msg = f"{COMMAND_SCHEMA}\nDataset Columns: {columns}"
     user_msg = f"User Query: {user_query}"
 
@@ -63,7 +60,6 @@ def get_llm_command(user_query, columns):
         # 3. Clean and Parse Response
         content = response.choices[0].message.content.strip()
         
-        # Remove markdown if the model adds it (e.g. ```json ... ```)
         if content.startswith("```"):
             content = content.replace("```json", "").replace("```", "")
         

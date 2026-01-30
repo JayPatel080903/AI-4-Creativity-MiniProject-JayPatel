@@ -95,8 +95,6 @@ def filter_dataset(df, query):
     Example: "Age > 30 and Department == 'Sales'"
     """
     try:
-        # subset = df.query(query)  <-- df.query is powerful but risky with user input
-        # Let's use a safer, simple approach or just try/except df.query if you trust the internal environment
         subset = df.query(query)
         return subset, None
     except Exception as e:

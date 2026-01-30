@@ -149,7 +149,7 @@ if uploaded:
 # -------------------------
 # Main Chat UI
 # -------------------------
-st.markdown("### 💬 Chat")
+st.markdown("### Chat")
 
 with st.form(key="chat_form", clear_on_submit=True):
     user_input = st.text_input("Type a command", placeholder="Try: overview, head 5, summary, insights...")
@@ -173,7 +173,7 @@ if send_button and user_input:
                     intent = get_llm_command(user_input, df.columns.tolist())
                     
                     if intent.get("kind") == "text" and "I can't" in intent.get("content", ""):
-                        intent = {"kind": "text", "content": "⚠️ Feature not supported yet... Future scope! 🚀"}
+                        intent = {"kind": "text", "content": "⚠️ Feature not supported yet... Future scope!"}
                 
                 except Exception:
                     intent = {"kind": "text", "content": "⚠️ Error connecting to AI."}
